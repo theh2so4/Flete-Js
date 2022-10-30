@@ -40,7 +40,7 @@ underline="\e[4m"
 # || Functions
 
 function displayFlete {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e " [+] Powered by:\n"
         sleep 0.15
@@ -53,26 +53,26 @@ function displayFlete {
         sleep 0.15
     echo -e "\n [+] Flete-Js | TheH2SO4"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayWhatsApp {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
-    echo -e "  ░██╗░░░░░░░██╗██╗░░██╗░█████╗░████████╗░██████╗░█████╗░██████╗░██████╗░"
+    echo -e "  ${lGreen}░██╗░░░░░░░██╗██╗░░██╗░█████╗░████████╗░██████╗░█████╗░██████╗░██████╗░"
     echo -e "  ░██║░░██╗░░██║██║░░██║██╔══██╗╚══██╔══╝██╔════╝██╔══██╗██╔══██╗██╔══██╗"
     echo -e "  ░╚██╗████╗██╔╝███████║███████║░░░██║░░░╚█████╗░███████║██████╔╝██████╔╝"
     echo -e "  ░░████╔═████║░██╔══██║██╔══██║░░░██║░░░░╚═══██╗██╔══██║██╔═══╝░██╔═══╝░"
     echo -e "  ░░╚██╔╝░╚██╔╝░██║░░██║██║░░██║░░░██║░░░██████╔╝██║░░██║██║░░░░░██║░░░░░"
-    echo -e "  ░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░"
+    echo -e "  ░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░${normal}"
         sleep 0.15
     echo -e "\n [+] Flete-Js | WhatsApp | TheH2SO4"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayError {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e "  ███████╗██████╗░██████╗░░█████╗░██████╗░"
     echo -e "  ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗"
@@ -83,11 +83,11 @@ function displayError {
         sleep 0.15
     echo -e "\n [*] $1"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayWarning {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e "  ░██╗░░░░░░░██╗░█████╗░██████╗░███╗░░██╗██╗███╗░░██╗░██████╗░"
     echo -e "  ░██║░░██╗░░██║██╔══██╗██╔══██╗████╗░██║██║████╗░██║██╔════╝░"
@@ -98,8 +98,94 @@ function displayWarning {
         sleep 0.15
     echo -e "\n [!] $1"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
+}
+
+function displayWhatsAppBots {
+    echo
+    echo -e " [+] Que bot te gustaria instalar (o volver a iniciar) (?) :\n"
+        sleep 0.15
+    echo -e "  [+] [MD]\n"
+        sleep 0.15
+    echo -e "    [1] ${lGreen}BrunoSobrino${normal}/${lYellow}TheMystic-Bot-MD${normal}"
+    echo -e "    [2] ${lGreen}BrunoSobrino${normal}/${lYellow}SimpleBot${normal}"
+        sleep 0.15
+    echo -e "\n [+] Flete-Js | TheH2SO4"
+    echo
+    echo -e "|==========================================================================|"
+}
+
+function directoryExists {
+    if [ -d $1 ]; then
+        echo -e "  [!] El directorio ya existe. Estas intentando iniciar este bot ${lGreen}${2}${normal}?\n      Si no es asi, el directorio sera borrado para reinstalar el bot. (Si/No)"
+        echo
+            read -p '  [>>] ' directorySelection
+                case $directorySelection in
+                    [Ss]* ) echo -e "\n   [+] Iniciando ${lGreen}${2}${normal}...\n"
+                            displayWarning "No cierres la terminal!"
+                            sleep 1.5
+                            echo -e "\n   [+] Gracias por usar Flete-Js. ;)"
+                            sleep 1.5
+                            clear
+                            cd $HOME/Flete-Js/${1}
+                            node . # &>/dev/null &
+                            # exit 1
+                            ;;
+                    [Nn]* ) echo -e " \n  [+] Borrando directorio..."
+                            rm -rf $1
+                            ;;
+                    * ) echo -e "\n   [+] Borrando directorio..."
+                            rm -rf $1
+                            ;;
+                esac
+    fi
+}
+
+function whatsappBotGitClone {
+    sleep 0.5
+    displayWarning "Clonando repositorio del bot ${lGreen}${2}${normal}. Por favor, espera..."
+    git clone https://github.com/${1}.git > /dev/null 2>&1
+    cd $2
+    sleep 0.5
+    clear
+}
+
+function whatsappBotDependenciesInstall {
+    sleep 0.5
+    displayWarning "Instalando dependencias, esto puede tardar un par de minutos, no cierres la terminal."
+    npm i && node .
 }
 
 # || Start
 
+displayWhatsApp
+sleep 1.5
+displayWhatsAppBots
+sleep 0.05
+mkdir $HOME/Flete-Js > /dev/null 2>&1
+
+echo
+read -p '  [>>] ' whatsappBotSelection
+    case $whatsappBotSelection in
+        1 ) echo -e "\n   [+] Genial, ${lGreen}TheMystic-Bot-MD${normal} de ${lYellow}BrunoSobrino${normal} es un buen proyecto."
+            sleep 1
+            echo
+            cd $HOME/Flete-Js
+            directoryExists TheMystic-Bot-MD TheMysticBot
+            whatsappBotGitClone BrunoSobrino/TheMystic-Bot-MD TheMystic-Bot-MD
+            whatsappBotDependenciesInstall
+                ;;
+        2 ) echo -e "\n   [+] Genial, ${lGreen}SimpleBot${normal} de ${lYellow}BrunoSobrino${normal} es un buen proyecto."
+            sleep 1
+            echo
+            cd $HOME/Flete-Js
+            directoryExists SimpleBot SimpleBot
+            whatsappBotGitClone BrunoSobrino/SimpleBot SimpleBot
+            whatsappBotDependenciesInstall
+                ;;
+        * ) displayError "Esta no es una opcion valida."
+            sleep 1
+            clear
+            exit 1
+                ;;
+    esac

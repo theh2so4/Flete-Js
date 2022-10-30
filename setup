@@ -40,7 +40,7 @@ underline="\e[4m"
 # || Functions
 
 function displayFlete {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e " [+] Powered by:\n"
         sleep 0.15
@@ -53,23 +53,23 @@ function displayFlete {
         sleep 0.15
     echo -e "\n [+] Flete-Js | TheH2SO4"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayPlatforms {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e " [+] Que tipo de bot te gustaria instalar (?) :\n"
         sleep 0.15
-    echo -e "  [1] WhatsApp"
+    echo -e "  [1] ${lGreen}WhatsApp${normal}"
         sleep 0.15
     echo -e "\n [+] Flete-Js | TheH2SO4"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayError {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e "  ███████╗██████╗░██████╗░░█████╗░██████╗░"
     echo -e "  ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗"
@@ -80,11 +80,11 @@ function displayError {
         sleep 0.15
     echo -e "\n [*] $1"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 function displayWarning {
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
     echo
     echo -e "  ░██╗░░░░░░░██╗░█████╗░██████╗░███╗░░██╗██╗███╗░░██╗░██████╗░"
     echo -e "  ░██║░░██╗░░██║██╔══██╗██╔══██╗████╗░██║██║████╗░██║██╔════╝░"
@@ -95,7 +95,7 @@ function displayWarning {
         sleep 0.15
     echo -e "\n [!] $1"
     echo
-    echo -e "|====================================================================|"
+    echo -e "|==========================================================================|"
 }
 
 # || Start
@@ -113,13 +113,21 @@ sleep 2.5
 clear
 sleep 0.5
 displayPlatforms
-sleep 3
+sleep 0.05
 
 # || Platforms (WhatsApp)
 
-echo -e "\n  [>>] "
-read platformSelection
-    case platformSelection in
-        [1] ) echo "a";;
-        * ) echo "b";;
+echo
+read -p '  [>>] ' platformSelection
+    case $platformSelection in
+        1 ) echo -e "\n   [+] Buena eleccion, ${lGreen}WhatsApp${normal} suena genial."
+            sleep 1
+            clear
+            bash src/scripts/WhatsApp/starterWhatsApp
+                ;;
+        * ) echo -e "\n   [+] Buena eleccion, ${lGreen}WhatsApp${normal} suena genial."
+            sleep 1
+            clear
+            bash src/scripts/WhatsApp/starterWhatsApp
+                ;;
     esac
